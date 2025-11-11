@@ -13,9 +13,9 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://mydomain.dev"
-Documentation = "https://github.com/MyGithubAccount/flet-info-popup"
-Repository = "https://github.com/MyGithubAccount/flet-info-popup"
-Issues = "https://github.com/MyGithubAccount/flet-info-popup/issues"
+Documentation = "https://github.com/wanna-pizza/flet-info-popup"
+Repository = "https://github.com/wanna-pizza/flet-info-popup"
+Issues = "https://github.com/wanna-pizza/flet-info-popup/issues"
 
 [tool.setuptools.package-data]
 "flutter.flet_info_popup" = ["**/*"]

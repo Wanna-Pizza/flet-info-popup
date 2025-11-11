@@ -1,8 +1,8 @@
 name: flet_info_popup
 description: Flet FletInfoPopup control
-repository: https://github.com/MyGithubAccount/flet-info-popup/src/flutter/flet_info_popup
+repository: https://github.com/wanna-pizza/flet-info-popup/src/flutter/flet_info_popup
 version: 0.1.0
-homepage: https://github.com/MyGithubAccount/flet-info-popup
+homepage: https://github.com/wanna-pizza/flet-info-popup
 
 environment:
   sdk: '>=3.3.0 <4.0.0'

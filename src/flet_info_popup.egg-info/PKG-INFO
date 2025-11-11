@@ -4,9 +4,9 @@ Version: 0.1.0
 Summary: FletInfoPopup control for Flet
 Author-email: Flet contributors <you@example.com>
 Project-URL: Homepage, https://mydomain.dev
-Project-URL: Documentation, https://github.com/MyGithubAccount/flet-info-popup
-Project-URL: Repository, https://github.com/MyGithubAccount/flet-info-popup
-Project-URL: Issues, https://github.com/MyGithubAccount/flet-info-popup/issues
+Project-URL: Documentation, https://github.com/wanna-pizza/flet-info-popup
+Project-URL: Repository, https://github.com/wanna-pizza/flet-info-popup
+Project-URL: Issues, https://github.com/wanna-pizza/flet-info-popup/issues
 Requires-Python: >=3.9
 Description-Content-Type: text/markdown
 Requires-Dist: flet>=0.28.3
@@ -24,7 +24,7 @@ Link to git repository:
 
 ```
 dependencies = [
-  "flet-info-popup @ git+https://github.com/MyGithubAccount/flet-info-popup",
+  "flet-info-popup @ git+https://github.com/wanna-pizza/flet-info-popup",
   "flet>=0.28.3",
 ]
 ```
@@ -47,4 +47,4 @@ flet build macos -v
 
 ## Documentation
 
-[Link to documentation](https://MyGithubAccount.github.io/flet-info-popup/)
+[Link to documentation](https://wanna-pizza.github.io/flet-info-popup/)

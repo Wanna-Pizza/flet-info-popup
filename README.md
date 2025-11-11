@@ -11,7 +11,7 @@ Link to git repository:
 
 ```
 dependencies = [
-  "flet-info-popup @ git+https://github.com/MyGithubAccount/flet-info-popup",
+  "flet-info-popup @ git+https://github.com/wanna-pizza/flet-info-popup",
   "flet>=0.28.3",
 ]
 ```
@@ -34,4 +34,4 @@ flet build macos -v
 
 ## Documentation
 
-[Link to documentation](https://MyGithubAccount.github.io/flet-info-popup/)
+[Link to documentation](https://wanna-pizza.github.io/flet-info-popup/)
