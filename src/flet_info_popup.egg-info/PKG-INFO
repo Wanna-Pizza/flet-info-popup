@@ -12,28 +12,31 @@ Description-Content-Type: text/markdown
 Requires-Dist: flet>=0.28.3
 
 # flet-info-popup
-FletInfoPopup control for Flet
+
+A custom popup widget with highlight support for Flet applications. Displays custom content in an overlay with optional highlight effect that creates a spotlight on the trigger control.
+
+## Features
+
+- 🎯 **Custom overlay positioning** - 8 position variants (top, bottom, left, right, corners)
+- ✨ **Highlight effect** - Creates spotlight on trigger control with customizable padding and colors
+- 🎨 **Smooth animations** - Built-in opacity and slide animations with linearToEaseOut curve
 
 ## Installation
 
 Add dependency to `pyproject.toml` of your Flet app:
 
-* **Git dependency**
+**Git dependency:**
 
-Link to git repository:
-
-```
+```toml
 dependencies = [
   "flet-info-popup @ git+https://github.com/wanna-pizza/flet-info-popup",
   "flet>=0.28.3",
 ]
 ```
 
-* **PyPi dependency**  
+**PyPi dependency** (if published):
 
-If the package is published on pypi.org:
-
-```
+```toml
 dependencies = [
   "flet-info-popup",
   "flet>=0.28.3",
@@ -41,10 +44,286 @@ dependencies = [
 ```
 
 Build your app:
-```
+
+```bash
 flet build macos -v
 ```
 
-## Documentation
+## Quick Start
 
-[Link to documentation](https://wanna-pizza.github.io/flet-info-popup/)
+```python
+import flet as ft
+from flet_info_popup import FletInfoPopup, PopupDismissTriggerBehavior, PopupPosition
+
+def main(page: ft.Page):
+    popup = FletInfoPopup(
+        content=ft.Container(
+            content=ft.Text("Click me!"),
+            bgcolor=ft.Colors.BLUE,
+            padding=20,
+            border_radius=10,
+        ),
+        body=ft.Container(
+            content=ft.Text("Hello from popup!", color="white"),
+            bgcolor=ft.Colors.AMBER,
+            padding=20,
+            border_radius=10,
+        ),
+        enable_highlight=True,
+        highlight_padding=10,
+        popup_position=PopupPosition.BOTTOM,
+    )
+  
+    page.add(
+        popup,
+        ft.Button("Show popup", on_click=lambda e: popup.open())
+    )
+
+ft.app(main)
+```
+
+## API Reference
+
+### FletInfoPopup
+
+Main popup control class.
+
+#### Parameters
+
+##### Core Controls
+
+| Parameter   | Type        | Default  | Description                                  |
+| ----------- | ----------- | -------- | -------------------------------------------- |
+| `content` | `Control` | `None` | The trigger control that will be highlighted |
+| `body`    | `Control` | `None` | The popup content to display in overlay      |
+
+##### Popup Behavior
+
+| Parameter                    | Type                            | Default         | Description                                                                                                                                                   |
+| ---------------------------- | ------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dismiss_trigger_behavior` | `PopupDismissTriggerBehavior` | `ON_TAP_AREA` | How the popup can be dismissed:`<br>`• `ON_TAP_AREA` - Dismiss when clicking outside `<br>`• `MANUAL` - Dismiss only via `.close()` method        |
+| `popup_position`           | `PopupPosition`               | `BOTTOM`      | Position relative to trigger control:`<br>`• `TOP`, `BOTTOM`, `LEFT`, `RIGHT<br>`• `TOP_LEFT`, `TOP_RIGHT`, `BOTTOM_LEFT`, `BOTTOM_RIGHT` |
+
+##### Styling
+
+| Parameter                 | Type           | Default  | Description                                                     |
+| ------------------------- | -------------- | -------- | --------------------------------------------------------------- |
+| `area_background_color` | `ColorValue` | `None` | Background color for the overlay area (when highlight disabled) |
+
+##### Highlight Effect
+
+| Parameter                      | Type             | Default  | Description                                                                                                                                                |
+| ------------------------------ | ---------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `enable_highlight`           | `bool`         | `None` | Enable spotlight highlight on trigger control                                                                                                              |
+| `highlight_background_color` | `ColorValue`   | `None` | Background color for the dimmed overlay (when highlight enabled)                                                                                           |
+| `highlight_border_radius`    | `float`        | `None` | Border radius of the highlighted area                                                                                                                      |
+| `highlight_padding`          | `PaddingValue` | `None` | Padding around the highlighted area. Can be:`<br>`• Single number: `10<br>`• Padding object: `ft.padding.only(top=5, right=10, bottom=5, left=10)` |
+
+##### Event Handlers
+
+| Parameter                 | Type         | Default  | Description                                    |
+| ------------------------- | ------------ | -------- | ---------------------------------------------- |
+| `on_controller_created` | `Callable` | `None` | Called when popup overlay is created and shown |
+| `on_area_pressed`       | `Callable` | `None` | Called when area outside popup is clicked      |
+| `on_dismissed`          | `Callable` | `None` | Called when popup is dismissed/hidden          |
+
+#### Methods
+
+| Method         | Description                   |
+| -------------- | ----------------------------- |
+| `.open()`    | Show the popup with animation |
+| `.show()`    | Alias for `.open()`         |
+| `.close()`   | Hide the popup with animation |
+| `.hide()`    | Alias for `.close()`        |
+| `.dismiss()` | Alias for `.close()`        |
+
+### Enums
+
+#### PopupDismissTriggerBehavior
+
+```python
+class PopupDismissTriggerBehavior(Enum):
+    ON_TAP_AREA = "on_tap_area"  # Dismiss when clicking outside
+    MANUAL = "manual"             # Dismiss only programmatically
+```
+
+#### PopupPosition
+
+```python
+class PopupPosition(Enum):
+    TOP = "top"                   # Above trigger
+    BOTTOM = "bottom"             # Below trigger (default)
+    LEFT = "left"                 # Left of trigger
+    RIGHT = "right"               # Right of trigger
+    TOP_LEFT = "top_left"         # Top-left corner
+    TOP_RIGHT = "top_right"       # Top-right corner
+    BOTTOM_LEFT = "bottom_left"   # Bottom-left corner
+    BOTTOM_RIGHT = "bottom_right" # Bottom-right corner
+```
+
+## Examples
+
+### Basic Popup
+
+```python
+popup = FletInfoPopup(
+    content=ft.ElevatedButton("Trigger"),
+    body=ft.Text("Popup content"),
+)
+
+# Add to page
+page.add(popup)
+
+# IMPORTANT: Open the popup programmatically
+popup.open()  # or popup.show()
+```
+
+### Popup with Highlight
+
+```python
+popup = FletInfoPopup(
+    content=ft.Container(
+        content=ft.Text("Important!"),
+        bgcolor=ft.Colors.BLUE,
+        padding=20,
+        border_radius=10,
+    ),
+    body=ft.Container(
+        content=ft.Text("This is important information"),
+        bgcolor=ft.Colors.WHITE,
+        padding=20,
+        border_radius=10,
+    ),
+    enable_highlight=True,
+    highlight_background_color=ft.Colors.with_opacity(0.8, ft.Colors.BLACK),
+    highlight_border_radius=10,
+    highlight_padding=15,
+    popup_position=PopupPosition.RIGHT,
+)
+
+# Add to page and open
+page.add(popup)
+popup.open()  # Show the popup with highlight effect
+```
+
+### Manual Dismiss with Close Button
+
+```python
+def close_popup(e):
+    popup.close()
+
+popup = FletInfoPopup(
+    content=ft.Text("Click to open"),
+    body=ft.Container(
+        content=ft.Column([
+            ft.Text("Popup with close button"),
+            ft.ElevatedButton("Close", on_click=close_popup),
+        ]),
+        bgcolor=ft.colors.WHITE,
+        padding=20,
+        border_radius=10,
+    ),
+    dismiss_trigger_behavior=PopupDismissTriggerBehavior.MANUAL,
+    enable_highlight=True,
+    highlight_padding=10,
+)
+
+# Add to page
+page.add(popup)
+
+# IMPORTANT: Popup must be opened manually (won't auto-show on click)
+button = ft.Button("Open", on_click=lambda e: popup.open())
+page.add(button)
+```
+
+### Tour/Walkthrough Example
+
+```python
+def main(page: ft.Page):
+    current_step = [0]
+  
+    steps = [
+        {"element": "Blue Box", "description": "This is step 1"},
+        {"element": "Green Box", "description": "This is step 2"},
+        {"element": "Red Box", "description": "This is step 3"},
+    ]
+  
+    def next_step(e):
+        popups[current_step[0]].close()
+        current_step[0] = (current_step[0] + 1) % len(popups)
+        popups[current_step[0]].open()
+  
+    popups = []
+    for step in steps:
+        popup = FletInfoPopup(
+            content=ft.Container(
+                content=ft.Text(step["element"]),
+                bgcolor=ft.Colors.BLUE,
+                padding=20,
+                border_radius=10,
+            ),
+            body=ft.Container(
+                content=ft.Column([
+                    ft.Text(step["description"]),
+                    ft.ElevatedButton("Next", on_click=next_step),
+                ]),
+                bgcolor=ft.Colors.WHITE,
+                padding=20,
+                border_radius=10,
+            ),
+            enable_highlight=True,
+            highlight_padding=10,
+            dismiss_trigger_behavior=PopupDismissTriggerBehavior.MANUAL,
+            popup_position=PopupPosition.RIGHT,
+        )
+        popups.append(popup)
+  
+    page.add(*popups)
+    page.add(ft.Button("Start Tour", on_click=lambda e: popups[0].open()))
+
+ft.app(main)
+```
+
+## Animation Details
+
+The popup includes built-in animations:
+
+- **Duration**: 300ms
+- **Curve**: `linearToEaseOut` (smooth deceleration)
+- **Effects**:
+  - Opacity fade in/out (0 ↔ 1)
+  - Slide transition (bottom to top on open, reverse on close)
+  - Offset: 0.1 (10% of popup height)
+
+## Technical Details
+
+### Highlight Implementation
+
+The highlight effect uses a custom `CustomClipper` with `PathFillType.evenOdd` to create a "hole" in the overlay:
+
+1. Draws a rectangle covering the entire screen
+2. Draws a rounded rectangle around the trigger control
+3. Uses even-odd fill rule to "cut out" the trigger area
+4. Result: Spotlight effect with dimmed background
+
+### Positioning System
+
+Popup positioning is calculated relative to the trigger control's global position:
+
+- Uses `CompositedTransformTarget` and `LayerLink` for accurate positioning
+- Maintains 10px spacing between trigger and popup
+- Supports all 8 position variants with proper edge calculations
+
+## License
+
+MIT License - Free to use, just give credit to the author.
+
+Copyright (c) 2025 Wanna-Pizza
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Author
+
+Created by [Wanna-Pizza](https://github.com/wanna-pizza)
