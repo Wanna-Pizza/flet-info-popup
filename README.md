@@ -1,9 +1,15 @@
 # flet-info-popup
 FletInfoPopup control for Flet
 
+
+https://github.com/user-attachments/assets/d8f0b1ad-d8f5-4480-8659-4c960279988b
+
+
 ## Installation
 
 Add dependency to `pyproject.toml` of your Flet app:
+
+
 
 * **Git dependency**
 
