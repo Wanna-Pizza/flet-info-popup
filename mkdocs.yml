@@ -1,0 +1,7 @@
+site_name: FletInfoPopup
+
+theme:
+  name: "material"
+
+plugins:
+  - mkdocstrings

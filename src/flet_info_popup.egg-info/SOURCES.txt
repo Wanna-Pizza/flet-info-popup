@@ -1,0 +1,17 @@
+README.md
+pyproject.toml
+src/flet_info_popup/__init__.py
+src/flet_info_popup/flet_info_popup.py
+src/flet_info_popup.egg-info/PKG-INFO
+src/flet_info_popup.egg-info/SOURCES.txt
+src/flet_info_popup.egg-info/dependency_links.txt
+src/flet_info_popup.egg-info/requires.txt
+src/flet_info_popup.egg-info/top_level.txt
+src/flutter/flet_info_popup/CHANGELOG.md
+src/flutter/flet_info_popup/LICENSE
+src/flutter/flet_info_popup/README.md
+src/flutter/flet_info_popup/pubspec.lock
+src/flutter/flet_info_popup/pubspec.yaml
+src/flutter/flet_info_popup/lib/flet_info_popup.dart
+src/flutter/flet_info_popup/lib/src/create_control.dart
+src/flutter/flet_info_popup/lib/src/flet_info_popup.dart
