@@ -97,14 +97,14 @@ def main(page: ft.Page):
             enable_highlight=True,
             highlight_background_color=ft.Colors.with_opacity(0.8, ft.Colors.BLACK),
             highlight_border_radius=10,
-            highlight_padding=0,
+            highlight_padding=10,
         )
         controls.controls.append(pop)
     
 
     page.add(
         controls,
-        ft.Button("Yooooo", on_click=open_next_popup)
+        ft.Button("4242", on_click=open_next_popup)
     )
 
 

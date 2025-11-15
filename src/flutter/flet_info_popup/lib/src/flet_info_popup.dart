@@ -179,6 +179,14 @@ class _FletInfoPopupControlState extends State<FletInfoPopupControl> with Single
     final targetSize = targetRenderBox.size;
     final targetRect = targetPosition & targetSize;
 
+    // Calculate expanded target rect with highlight padding
+    final expandedTargetRect = Rect.fromLTRB(
+      targetRect.left - highlightPadding.left,
+      targetRect.top - highlightPadding.top,
+      targetRect.right + highlightPadding.right,
+      targetRect.bottom + highlightPadding.bottom,
+    );
+
     // Calculate popup position based on position parameter
     double? popupLeft;
     double? popupTop;
@@ -188,40 +196,40 @@ class _FletInfoPopupControlState extends State<FletInfoPopupControl> with Single
 
     switch (position) {
       case "top":
-        popupLeft = targetPosition.dx;
-        popupBottom = MediaQuery.of(context).size.height - targetPosition.dy + spacing;
+        popupLeft = expandedTargetRect.left;
+        popupBottom = MediaQuery.of(context).size.height - expandedTargetRect.top + spacing;
         break;
       case "bottom":
-        popupLeft = targetPosition.dx;
-        popupTop = targetPosition.dy + targetSize.height + spacing;
+        popupLeft = expandedTargetRect.left;
+        popupTop = expandedTargetRect.bottom + spacing;
         break;
       case "left":
-        popupRight = MediaQuery.of(context).size.width - targetPosition.dx + spacing;
-        popupTop = targetPosition.dy;
+        popupRight = MediaQuery.of(context).size.width - expandedTargetRect.left + spacing;
+        popupTop = expandedTargetRect.top;
         break;
       case "right":
-        popupLeft = targetPosition.dx + targetSize.width + spacing;
-        popupTop = targetPosition.dy;
+        popupLeft = expandedTargetRect.right + spacing;
+        popupTop = expandedTargetRect.top;
         break;
       case "top_left":
-        popupRight = MediaQuery.of(context).size.width - targetPosition.dx + spacing;
-        popupBottom = MediaQuery.of(context).size.height - targetPosition.dy + spacing;
+        popupRight = MediaQuery.of(context).size.width - expandedTargetRect.left + spacing;
+        popupBottom = MediaQuery.of(context).size.height - expandedTargetRect.top + spacing;
         break;
       case "top_right":
-        popupLeft = targetPosition.dx + targetSize.width + spacing;
-        popupBottom = MediaQuery.of(context).size.height - targetPosition.dy + spacing;
+        popupLeft = expandedTargetRect.right + spacing;
+        popupBottom = MediaQuery.of(context).size.height - expandedTargetRect.top + spacing;
         break;
       case "bottom_left":
-        popupRight = MediaQuery.of(context).size.width - targetPosition.dx + spacing;
-        popupTop = targetPosition.dy + targetSize.height + spacing;
+        popupRight = MediaQuery.of(context).size.width - expandedTargetRect.left + spacing;
+        popupTop = expandedTargetRect.bottom + spacing;
         break;
       case "bottom_right":
-        popupLeft = targetPosition.dx + targetSize.width + spacing;
-        popupTop = targetPosition.dy + targetSize.height + spacing;
+        popupLeft = expandedTargetRect.right + spacing;
+        popupTop = expandedTargetRect.bottom + spacing;
         break;
       default: // bottom
-        popupLeft = targetPosition.dx;
-        popupTop = targetPosition.dy + targetSize.height + spacing;
+        popupLeft = expandedTargetRect.left;
+        popupTop = expandedTargetRect.bottom + spacing;
     }
 
     return AnimatedBuilder(

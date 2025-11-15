@@ -21,11 +21,16 @@ A custom popup widget with highlight support for Flet applications. Displays cus
 - ✨ **Highlight effect** - Creates spotlight on trigger control with customizable padding and colors
 - 🎨 **Smooth animations** - Built-in opacity and slide animations with linearToEaseOut curve
 
+
+https://github.com/user-attachments/assets/d8f0b1ad-d8f5-4480-8659-4c960279988b
+
+
 ## Installation
 
 Add dependency to `pyproject.toml` of your Flet app:
 
-**Git dependency:**
+
+* **Git dependency**
 
 ```toml
 dependencies = [
